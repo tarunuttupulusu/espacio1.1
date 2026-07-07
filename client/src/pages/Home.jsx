@@ -4,6 +4,7 @@ import { motion, AnimatePresence, useInView, useScroll, useTransform } from 'fra
 import { ArrowUpRight, ArrowRight } from 'lucide-react';
 import axios from 'axios';
 import SEO from '../components/common/SEO';
+import Logo from '../components/common/Logo';
 
 const Reveal = ({ children, delay = 0, className = '' }) => {
   const ref = useRef(null);
@@ -58,6 +59,20 @@ const Home = () => {
   const [loading, setLoading] = useState(true);
   const heroRef = useRef(null);
   const [openFaqIdx, setOpenFaqIdx] = useState(null);
+  const [showIntro, setShowIntro] = useState(true);
+
+  const handleIntroComplete = () => {
+    setShowIntro(false);
+    sessionStorage.setItem('espacio_intro_played', 'true');
+  };
+
+  useEffect(() => {
+    // Safety fallback timer if onComplete doesn't fire (e.g. background tab)
+    const timer = setTimeout(() => {
+      handleIntroComplete();
+    }, 6000);
+    return () => clearTimeout(timer);
+  }, []);
 
   const faqData = [
     {
@@ -101,25 +116,10 @@ const Home = () => {
     return () => clearInterval(timer);
   }, []);
 
-  // Hook scroll progression of the 150vh hero container
-  const { scrollYProgress } = useScroll({
-    target: heroRef,
-    offset: ["start start", "end end"]
-  });
-
-  // Background Parallax
-  const bgScale = useTransform(scrollYProgress, [0, 1], [1.05, 0.95]);
-  const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "5%"]);
-
-  // Left Card: Scale down + float up + fade
-  const cardScale = useTransform(scrollYProgress, [0, 1], [1, 0.88]);
-  const cardY = useTransform(scrollYProgress, [0, 1], ["0px", "-60px"]);
-  const cardOpacity = useTransform(scrollYProgress, [0, 0.7, 1], [1, 0.9, 0]);
-
-  // Right panels: Scale down + float up + fade
-  const rightScale = useTransform(scrollYProgress, [0, 1], [1, 0.88]);
-  const rightY = useTransform(scrollYProgress, [0, 1], ["0px", "-45px"]);
-  const rightOpacity = useTransform(scrollYProgress, [0, 0.7, 1], [1, 0.9, 0]);
+  // Page-level scroll for subtle parallax on the background image
+  const { scrollYProgress } = useScroll();
+  const bgScale = useTransform(scrollYProgress, [0, 0.2], [1.05, 0.97]);
+  const bgY     = useTransform(scrollYProgress, [0, 0.2], ['0%', '6%']);
 
   useEffect(() => {
     axios.get('/projects?limit=6&featured=true')
@@ -150,15 +150,55 @@ const Home = () => {
     <div className="bg-bg overflow-x-hidden">
       <SEO title="Premium Interior Design, Hyderabad" description="ESPACIO is Hyderabad's premier interior design studio. Full-home interiors, modular kitchens, commercial offices, and premium material supply." url="/" />
 
-      {/* ── 1. HERO (Resentii Layout with Scroll-Driven 3D Transform) ── */}
-      <section ref={heroRef} className="relative h-[150vh] bg-bg-dark">
-        {/* Sticky Canvas Container — NO perspective here (breaks backdrop-filter) */}
-        <div className="sticky top-0 h-screen w-full overflow-hidden">
-          
+      {/* Premium Fullscreen Logo Intro Preloader */}
+      <AnimatePresence>
+        {showIntro && (
+          <motion.div
+            initial={{ opacity: 1 }}
+            exit={{ 
+              y: '-100%',
+              transition: { duration: 2.2, ease: [0.16, 1, 0.3, 1] }
+            }}
+            className="fixed inset-0 bg-bg-dark z-[9999] flex flex-col items-center justify-center cursor-pointer select-none"
+            onClick={() => setShowIntro(false)}
+          >
+            <motion.div
+              initial={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ 
+                opacity: 0,
+                y: -180,
+                scale: 0.8,
+                transition: { duration: 1.9, ease: [0.16, 1, 0.3, 1] }
+              }}
+              className="flex flex-col items-center"
+            >
+              <Logo scrolled={false} size="large" onComplete={handleIntroComplete} />
+            </motion.div>
+            <motion.p 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 0.25 }}
+              transition={{ delay: 2.3, duration: 1 }}
+              className="absolute bottom-12 font-sans text-[10px] text-white uppercase tracking-[0.25em]"
+            >
+              Click to skip
+            </motion.p>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* ── 1. HERO (Rounded Card — matches Services) ── */}
+      <section ref={heroRef} className="relative h-[90vh] lg:h-[95vh] min-h-[640px] lg:min-h-0 px-5 pt-5 pb-[10px] lg:px-12">
+        {/* Rounded card — fills the section */}
+        <div
+          className="relative w-full h-full overflow-hidden will-change-transform rounded-[24px] lg:rounded-[40px]"
+        >
           {/* Background Image Layer */}
           <motion.div 
             style={{ scale: bgScale, y: bgY }}
             className="absolute inset-0 will-change-transform overflow-hidden"
+            initial={{ opacity: 0, scale: 1.15 }}
+            animate={showIntro ? { opacity: 0, scale: 1.15 } : { opacity: 1, scale: 1.05 }}
+            transition={{ duration: 1.6, ease: [0.16, 1, 0.3, 1] }}
           >
             <AnimatePresence initial={false}>
               <motion.img
@@ -168,7 +208,7 @@ const Home = () => {
                 initial={{ x: '15%', opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
                 exit={{ x: '-15%', opacity: 0 }}
-                transition={{ duration: 1.8, ease: [0.25, 1, 0.5, 1] }}
+                transition={{ duration: 1.6, ease: [0.25, 1, 0.5, 1] }}
                 className="absolute inset-0 w-full h-full object-cover"
               />
             </AnimatePresence>
@@ -179,31 +219,48 @@ const Home = () => {
           <div className="absolute inset-0 z-10 flex flex-col justify-end pointer-events-none">
               <div className="w-full max-w-[1440px] mx-auto px-6 md:px-12 pb-8 md:pb-14 pointer-events-auto">
               
-              <div className="flex flex-col lg:flex-row items-end gap-4 lg:gap-6">
+              <motion.div 
+                className="flex flex-col lg:flex-row items-end gap-4 lg:gap-6"
+                initial="hidden"
+                animate={showIntro ? "hidden" : "visible"}
+                variants={{
+                  hidden: { opacity: 0 },
+                  visible: {
+                    opacity: 1,
+                    transition: {
+                      staggerChildren: 0.22,
+                      delayChildren: 0.15
+                    }
+                  }
+                }}
+              >
 
                 {/* ─── LEFT: Craft Card ─── */}
                 <motion.div
-                  style={{ 
-                    scale: cardScale, 
-                    y: cardY, 
-                    opacity: cardOpacity,
-                  }}
-                  className="w-full lg:max-w-[480px] will-change-transform"
+                  className="w-full lg:max-w-[480px]"
                 >
-                  <div 
+                  <motion.div 
                     className="relative rounded-[20px] md:rounded-[28px] overflow-hidden border border-white/[0.15] shadow-2xl"
                     style={{ 
                       background: 'rgba(12, 12, 16, 0.82)',
                       backdropFilter: 'blur(40px)',
                       WebkitBackdropFilter: 'blur(40px)',
                     }}
+                    variants={{
+                      hidden: { opacity: 0, y: 35 },
+                      visible: { 
+                        opacity: 1, 
+                        y: 0,
+                        transition: { duration: 1.3, ease: [0.16, 1, 0.3, 1] }
+                      }
+                    }}
                   >
                     {/* Top glass highlight */}
                     <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/25 to-transparent" />
                     
                     <div className="p-5 md:p-7">
-                      {/* Large interior thumbnail */}
-                      <div className="w-full aspect-[16/9] rounded-[14px] overflow-hidden mb-5">
+                      {/* Large interior thumbnail (hidden on mobile to save vertical space) */}
+                      <div className="hidden sm:block w-full aspect-[16/9] rounded-[14px] overflow-hidden mb-5">
                         <img 
                           src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=600&q=80" 
                           alt="Luxury interior showcase"
@@ -236,20 +293,26 @@ const Home = () => {
                         </Link>
                       </div>
                     </div>
-                  </div>
+                  </motion.div>
                 </motion.div>
 
                 {/* ─── RIGHT: Stats + Description ─── */}
-                <motion.div 
-                  style={{ 
-                    scale: rightScale, 
-                    y: rightY, 
-                    opacity: rightOpacity,
-                  }}
-                  className="w-full lg:flex-1 flex flex-col gap-6 md:gap-8 will-change-transform"
+                <motion.div
+                  className="w-full lg:flex-1"
                 >
+                  <motion.div
+                    className="flex flex-col gap-6 md:gap-8 w-full"
+                    variants={{
+                      hidden: { opacity: 0, y: 25 },
+                      visible: { 
+                        opacity: 1, 
+                        y: 0,
+                        transition: { duration: 1.3, ease: [0.16, 1, 0.3, 1] }
+                      }
+                    }}
+                  >
                   
-                  {/* Stats Row — Resentii style: large numbers, no glass cards */}
+                  {/* Stats Row */}
                   <div className="flex gap-6 md:gap-10 lg:justify-end">
                     {[
                       { val: '15+', label: 'Years Legacy' },
@@ -263,9 +326,9 @@ const Home = () => {
                     ))}
                   </div>
 
-                  {/* Description — frosted glass card matching Resentii */}
+                  {/* Description (hidden on mobile to prevent overflow) */}
                   <div 
-                    className="lg:max-w-[400px] lg:ml-auto rounded-[20px] md:rounded-[24px] p-5 md:p-6 border border-white/[0.12]"
+                    className="hidden sm:block lg:max-w-[400px] lg:ml-auto rounded-[20px] md:rounded-[24px] p-5 md:p-6 border border-white/[0.12]"
                     style={{ 
                       background: 'rgba(20, 20, 24, 0.55)',
                       backdropFilter: 'blur(28px)',
@@ -276,14 +339,15 @@ const Home = () => {
                       ESPACIO redefines interiors through precision, balance, and understated luxury. From concept to completion, we shape spaces that feel intentional, elevated, and distinctly yours.
                     </p>
                   </div>
-
                 </motion.div>
-              </div>
-
-            </div>
+              </motion.div>
+            </motion.div>
           </div>
         </div>
+        </div>
       </section>
+
+
 
       {/* ── 2. INTRO TEXT ───────────────────────────────────────────────────── */}
       <section className="py-32 px-6 md:px-12 max-w-[1440px] mx-auto">

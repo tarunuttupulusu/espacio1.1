@@ -1,6 +1,6 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { motion, useInView } from 'framer-motion';
+import { motion, AnimatePresence, useInView, useScroll, useTransform } from 'framer-motion';
 import { ArrowUpRight, CheckCircle2 } from 'lucide-react';
 import SEO from '../components/common/SEO';
 
@@ -61,29 +61,120 @@ const processSteps = [
   { step: '06', name: 'Quality Handover', desc: 'Final punch-list inspection, clean-up, and keys handover on your timeline.' },
 ];
 
+const heroImages = [
+  'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=1920&q=90',
+  'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=90',
+  'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1920&q=90',
+  'https://images.unsplash.com/photo-1565183997392-2f6f122e5912?auto=format&fit=crop&w=1920&q=90',
+];
+
 const Services = () => {
+  const heroRef = useRef(null);
+  const [currentImageIdx, setCurrentImageIdx] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentImageIdx((prev) => (prev + 1) % heroImages.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, []);
+
+  // Scroll-driven parallax — same as Home
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ['start start', 'end end'],
+  });
+  const bgScale = useTransform(scrollYProgress, [0, 1], [1.05, 0.95]);
+  const bgY     = useTransform(scrollYProgress, [0, 1], ['0%', '8%']);
+  const textY   = useTransform(scrollYProgress, [0, 1], ['0px', '-40px']);
+  const textOp  = useTransform(scrollYProgress, [0, 0.6, 1], [1, 0.9, 0]);
+
   return (
     <div className="bg-bg overflow-x-hidden">
       <SEO title="Services — ESPACIO Interiors" description="Full home interiors, modular kitchens, commercial spaces, and renovations. Engineering-first luxury design executed by ESPACIO." url="/services" />
 
-      {/* ── HERO ── */}
-      <section className="bg-bg-dark relative pt-40 pb-24 px-6 md:px-10 overflow-hidden">
-        <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=1920&q=80"
-          alt="ESPACIO Services" className="absolute inset-0 w-full h-full object-cover opacity-25" />
-        <div className="absolute inset-0 bg-gradient-to-b from-bg-dark/60 to-bg-dark/95" />
-        <div className="relative max-w-[1440px] mx-auto">
-          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.1 }}
-            className="font-sans text-[11px] font-semibold uppercase tracking-[0.18em] text-gold mb-6">Services</motion.p>
-          <motion.h1 initial={{ opacity: 0, y: 32 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="font-display text-[clamp(42px,6vw,80px)] font-bold leading-[1.05] tracking-tight text-bg max-w-[700px]">
-            Designed around your lifestyle.
-          </motion.h1>
-          <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="font-sans text-[15px] text-bg/60 max-w-[480px] leading-relaxed mt-6">
-            Turnkey design and build with engineering tolerances. No templates. No hidden package tricks.
-          </motion.p>
+      {/* ── ROUNDED CARD HERO (Resentii style) ── */}
+      {/* Outer wrapper: responsive height, small gap from all edges */}
+      <section
+        ref={heroRef}
+        className="relative h-[80vh] lg:h-[95vh] px-5 pt-5 pb-[10px] lg:px-12"
+      >
+        {/* The rounded card container — fills the padded area */}
+        <div
+          className="relative w-full h-full overflow-hidden will-change-transform rounded-[24px] lg:rounded-[40px]"
+        >
+          {/* Parallax background image layer */}
+          <motion.div
+            style={{ scale: bgScale, y: bgY }}
+            className="absolute inset-0 will-change-transform overflow-hidden"
+          >
+            <AnimatePresence initial={false}>
+              <motion.img
+                key={currentImageIdx}
+                src={heroImages[currentImageIdx]}
+                alt="ESPACIO Services"
+                initial={{ x: '15%', opacity: 0 }}
+                animate={{ x: 0,     opacity: 1 }}
+                exit={{ x: '-15%',   opacity: 0 }}
+                transition={{ duration: 1.6, ease: [0.25, 1, 0.5, 1] }}
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+            </AnimatePresence>
+          </motion.div>
+
+          {/* Gradient overlays — dark at top (behind navbar) + dark at bottom (for text) */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/75 z-10 pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/25 to-transparent z-10 pointer-events-none" />
+
+          {/* Text block — pinned to bottom-left of the card */}
+          <motion.div
+            style={{ y: textY, opacity: textOp }}
+            className="absolute inset-0 z-20 flex flex-col justify-end"
+          >
+            <div className="w-full px-8 md:px-12 pb-10 md:pb-14">
+              <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                className="flex flex-col items-start gap-4"
+              >
+                {/* Pill label */}
+                <div className="inline-flex items-center gap-2 bg-black/55 backdrop-blur-md border border-white/20 text-white px-4 py-2 rounded-full">
+                  <span className="w-1.5 h-1.5 rounded-full bg-gold animate-pulse" />
+                  <span className="font-sans text-[11px] font-semibold uppercase tracking-[0.2em]">Services</span>
+                </div>
+
+                {/* Main heading */}
+                <h1 className="font-display font-bold leading-none tracking-tight text-white"
+                  style={{ fontSize: 'clamp(48px, 8vw, 108px)' }}>
+                  Our Services
+                </h1>
+
+                <p className="font-sans text-[14px] md:text-[15px] text-white/60 max-w-[420px] leading-relaxed">
+                  Turnkey design and build with engineering tolerances. No templates. No hidden package tricks.
+                </p>
+
+                {/* Image indicator dots */}
+                <div className="flex items-center gap-2 mt-1">
+                  {heroImages.map((_, i) => (
+                    <button
+                      key={i}
+                      onClick={() => setCurrentImageIdx(i)}
+                      className={`rounded-full transition-all duration-500 ${
+                        i === currentImageIdx
+                          ? 'w-6 h-1.5 bg-gold'
+                          : 'w-1.5 h-1.5 bg-white/40 hover:bg-white/70'
+                      }`}
+                    />
+                  ))}
+                </div>
+              </motion.div>
+            </div>
+          </motion.div>
         </div>
       </section>
+
+
 
       {/* ── SERVICES LIST ── */}
       <section className="py-24 px-6 md:px-10">
@@ -118,6 +209,7 @@ const Services = () => {
           ))}
         </div>
       </section>
+
 
       {/* ── PROCESS ── */}
       <section className="py-24 px-6 md:px-10 bg-bg-card border-t border-ink-border">

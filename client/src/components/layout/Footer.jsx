@@ -57,40 +57,44 @@ const Footer = () => {
       {/* Thin Divider line */}
       <div className="max-w-[1440px] mx-auto px-6 md:px-12 border-t border-white/10 mb-12" />
 
-      {/* 2. Contact Block: Address + Get in Touch side by side on desktop, stacked on mobile */}
-      <div className="max-w-[1440px] mx-auto px-6 md:px-12 mb-14">
+      {/* 2. Contact Block: Address + Get in Touch side by side */}
+      <div className="max-w-[1440px] mx-auto px-6 md:px-12 flex flex-col md:flex-row md:justify-between items-start gap-8 mb-14">
         {/* Address + Phone */}
-        <p className="font-sans text-[15px] text-bg/60 leading-relaxed mb-1">
-          Aziznagar, Moinabad Road, Hyderabad, Telangana 500075
-        </p>
-        <a href="tel:+919000000000" className="font-sans text-[15px] text-bg/60 hover:text-bg transition-colors block mb-8">
-          +91 90000 00000
-        </a>
+        <div>
+          <p className="font-sans text-[15px] text-bg/60 leading-relaxed">
+            Aziznagar, Moinabad Road, Hyderabad, Telangana 500075
+          </p>
+          <a href="tel:+919000000000" className="font-sans text-[15px] text-bg/60 hover:text-bg transition-colors block mt-1">
+            +91 90000 00000
+          </a>
+        </div>
 
         {/* Get in Touch + Email */}
-        <p className="font-sans text-[12px] font-semibold uppercase tracking-[0.2em] text-white/40 mb-1">
-          Get in Touch
-        </p>
-        <a href="mailto:espacio.hyd@gmail.com" className="font-sans text-[18px] md:text-[22px] font-medium text-bg hover:text-gold transition-colors">
-          espacio.hyd@gmail.com
-        </a>
+        <div className="md:text-right">
+          <p className="font-sans text-[13px] text-white/40 mb-1">
+            Get in Touch
+          </p>
+          <a href="mailto:espacio.hyd@gmail.com" className="font-sans text-[17px] md:text-[20px] font-medium text-bg hover:text-gold transition-colors">
+            espacio.hyd@gmail.com
+          </a>
+        </div>
       </div>
 
-      {/* 3. Nav + Social Two-Column Grid */}
-      <div className="max-w-[1440px] mx-auto px-6 md:px-12 grid grid-cols-2 md:flex md:flex-row md:justify-between gap-10 py-8 border-t border-white/5 mb-4">
-        {/* Left: Nav Links — stacked vertically */}
-        <div className="flex flex-col gap-4">
+      {/* 3. Nav + Social Responsive Row */}
+      <div className="max-w-[1440px] mx-auto px-6 md:px-12 grid grid-cols-2 md:flex md:flex-row md:justify-between gap-x-6 gap-y-8 pb-12 mb-4">
+        {/* Left: Nav Links — vertical on mobile, horizontal on desktop */}
+        <div className="flex flex-col md:flex-row md:flex-wrap gap-4 md:gap-x-6 md:gap-y-2">
           {navLinks.map((link) => (
-            <Link key={link.name} to={link.href} className="font-sans text-[15px] font-medium text-bg/60 hover:text-bg transition-colors">
+            <Link key={link.name} to={link.href} className="font-sans text-[14px] font-medium text-bg/60 hover:text-bg transition-colors">
               {link.name}
             </Link>
           ))}
         </div>
 
-        {/* Right: Social Links — stacked vertically, right-aligned on mobile too */}
-        <div className="flex flex-col gap-4 items-end md:items-start">
+        {/* Right: Social Links — vertical/aligned right on mobile, horizontal on desktop */}
+        <div className="flex flex-col items-end md:flex-row gap-4 md:gap-6 md:items-center">
           {socialLinks.map((link) => (
-            <a key={link.name} href={link.href} target="_blank" rel="noopener noreferrer" className="font-sans text-[15px] font-medium text-bg/60 hover:text-bg transition-colors">
+            <a key={link.name} href={link.href} target="_blank" rel="noopener noreferrer" className="font-sans text-[14px] font-medium text-bg/60 hover:text-bg transition-colors">
               {link.name}
             </a>
           ))}
@@ -98,10 +102,10 @@ const Footer = () => {
       </div>
 
       {/* 4. Massive Animated ESPACIO Typography */}
-      <div ref={espRef} className="max-w-[1440px] mx-auto px-4 my-10 select-none overflow-hidden flex items-center justify-center">
+      <div ref={espRef} className="w-full select-none overflow-hidden flex items-center justify-center mt-6 mb-2">
         {/* ESP - slides in from left */}
         <motion.span
-          className="font-display text-[clamp(80px,14vw,200px)] font-bold tracking-tight text-white/90 leading-none"
+          className="font-display text-[clamp(85px,21vw,300px)] font-bold tracking-tighter text-white leading-none uppercase"
           initial={{ x: '-80%', opacity: 0 }}
           animate={inView ? { x: 0, opacity: 1 } : { x: '-80%', opacity: 0 }}
           transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
@@ -110,7 +114,7 @@ const Footer = () => {
         </motion.span>
         {/* ACIO - slides in from right */}
         <motion.span
-          className="font-display text-[clamp(80px,14vw,200px)] font-bold tracking-tight text-white/90 leading-none"
+          className="font-display text-[clamp(85px,21vw,300px)] font-bold tracking-tighter text-white leading-none uppercase"
           initial={{ x: '80%', opacity: 0 }}
           animate={inView ? { x: 0, opacity: 1 } : { x: '80%', opacity: 0 }}
           transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}

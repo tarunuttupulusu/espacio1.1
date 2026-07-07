@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import axios from 'axios';
 import { ArrowUpRight } from 'lucide-react';
 import SEO from '../components/common/SEO';
@@ -19,14 +19,160 @@ const Reveal = ({ children, delay = 0, className = '' }) => {
 };
 
 const mockCategories = [
-  { name: 'Modular Kitchen', slug: 'modular-kitchen', description: 'Precision-engineered kitchens with high-gloss acrylic, polygranite surfaces, and concealed lighting tracks.', heroImage: 'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=1200&q=80', galleryImages: ['https://images.unsplash.com/photo-1565183997392-2f6f122e5912?auto=format&fit=crop&w=800&q=80','https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=800&q=80','https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=800&q=80'], filters: ['Island Kitchen', 'Parallel Kitchen', 'L-Shape', 'Modern', 'Luxury'] },
-  { name: 'Master Bedroom', slug: 'master-bedroom', description: 'Sanctuary interiors with walnut wood headboards, warm lighting zones, and bespoke built-in wardrobes.', heroImage: 'https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1200&q=80', galleryImages: ['https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=800&q=80','https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&w=800&q=80','https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80'], filters: ['Master Suite', 'Kids Room', 'Guest Room', 'Japandi', 'Luxury'] },
-  { name: 'Living Room', slug: 'living-room', description: 'Editorial living zones crafted around natural light, marble accents, and low-profile custom furniture.', heroImage: 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1200&q=80', galleryImages: ['https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80','https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80','https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80'], filters: ['Minimal', 'Luxury', 'Japandi', 'TV Wall', 'Open Layout'] },
-  { name: 'Wardrobe Systems', slug: 'wardrobes', description: 'Bespoke floor-to-ceiling storage with velvet drawer linings, mirror panels, and hidden pull-out trays.', heroImage: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80', galleryImages: ['https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&w=800&q=80','https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80','https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=800&q=80'], filters: ['Walk-in', 'Built-in', 'Sliding', 'Modern', 'Luxury'] },
-  { name: 'Home Office', slug: 'home-office', description: 'Focus zones with sound-dampening fluted panels, ergonomic wall shelving and concealed cable management.', heroImage: 'https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=1200&q=80', galleryImages: ['https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80','https://images.unsplash.com/photo-1497366412874-3415097a27e7?auto=format&fit=crop&w=800&q=80','https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=800&q=80'], filters: ['Minimal', 'Executive', 'Creative', 'Storage'] },
-  { name: 'Commercial Office', slug: 'commercial-office', description: 'Turnkey executive workspaces designed for efficient traffic flows, acoustic panels, and brand-aligned finishes.', heroImage: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80', galleryImages: ['https://images.unsplash.com/photo-1497366412874-3415097a27e7?auto=format&fit=crop&w=800&q=80','https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=800&q=80','https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=800&q=80'], filters: ['Executive', 'Open Plan', 'Reception', 'Collaborative'] },
-  { name: 'Pooja Room', slug: 'pooja-room', description: 'Sacred sanctuaries merging ancestral stone textures with sleek back-lit marble panels and warm lighting.', heroImage: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1200&q=80', galleryImages: ['https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80','https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=800&q=80','https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80'], filters: ['Traditional', 'Modern', 'Marble', 'Minimal'] },
-  { name: 'Dining Room', slug: 'dining-room', description: 'Refined gathering spaces with custom hardwood dining tables, feature pendant lighting, and plaster wall finishes.', heroImage: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80', galleryImages: ['https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80','https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80','https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80'], filters: ['Formal', 'Casual', 'Luxury', 'Open Plan'] },
+  { 
+    name: 'Modular Kitchen', 
+    slug: 'modular-kitchen', 
+    description: 'Precision-engineered kitchens with high-gloss acrylic, polygranite surfaces, and concealed lighting tracks.', 
+    heroImage: 'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=1200&q=80', 
+    galleryImages: [
+      'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1565183997392-2f6f122e5912?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1556912173-3bb406ef7e77?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1539924465411-2f99455b87b0?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1507089947368-19c1da9775ae?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1520699049698-acd2fccb8cc8?auto=format&fit=crop&w=800&q=80'
+    ], 
+    filters: ['Island Kitchen', 'Parallel Kitchen', 'L-Shape', 'Modern', 'Luxury'] 
+  },
+  { 
+    name: 'Master Bedroom', 
+    slug: 'master-bedroom', 
+    description: 'Sanctuary interiors with walnut wood headboards, warm lighting zones, and bespoke built-in wardrobes.', 
+    heroImage: 'https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1200&q=80', 
+    galleryImages: [
+      'https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1560185127-6a2806647f81?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1540518614846-7eded433c457?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?auto=format&fit=crop&w=800&q=80'
+    ], 
+    filters: ['Master Suite', 'Kids Room', 'Guest Room', 'Japandi', 'Luxury'] 
+  },
+  { 
+    name: 'Living Room', 
+    slug: 'living-room', 
+    description: 'Editorial living zones crafted around natural light, marble accents, and low-profile custom furniture.', 
+    heroImage: 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1200&q=80', 
+    galleryImages: [
+      'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80'
+    ], 
+    filters: ['Minimal', 'Luxury', 'Japandi', 'TV Wall', 'Open Layout'] 
+  },
+  { 
+    name: 'Wardrobe Systems', 
+    slug: 'wardrobes', 
+    description: 'Bespoke floor-to-ceiling storage with velvet drawer linings, mirror panels, and hidden pull-out trays.', 
+    heroImage: 'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80', 
+    galleryImages: [
+      'https://images.unsplash.com/photo-1558882224-dda166733079?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80'
+    ], 
+    filters: ['Walk-in', 'Built-in', 'Sliding', 'Modern', 'Luxury'] 
+  },
+  { 
+    name: 'Home Office', 
+    slug: 'home-office', 
+    description: 'Focus zones with sound-dampening fluted panels, ergonomic wall shelving and concealed cable management.', 
+    heroImage: 'https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=1200&q=80', 
+    galleryImages: [
+      'https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1497366412874-3415097a27e7?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1517502884422-41eaaced0168?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1531538606174-0f90ff5dce83?auto=format&fit=crop&w=800&q=80'
+    ], 
+    filters: ['Minimal', 'Executive', 'Creative', 'Storage'] 
+  },
+  { 
+    name: 'Commercial Office', 
+    slug: 'commercial-office', 
+    description: 'Turnkey executive workspaces designed for efficient traffic flows, acoustic panels, and brand-aligned finishes.', 
+    heroImage: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80', 
+    galleryImages: [
+      'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1531973576160-7125cd663d86?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1517502884422-41eaaced0168?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1531538606174-0f90ff5dce83?auto=format&fit=crop&w=800&q=80'
+    ], 
+    filters: ['Executive', 'Open Plan', 'Reception', 'Collaborative'] 
+  },
+  { 
+    name: 'Pooja Room', 
+    slug: 'pooja-room', 
+    description: 'Sacred sanctuaries merging ancestral stone textures with sleek back-lit marble panels and warm lighting.', 
+    heroImage: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1200&q=80', 
+    galleryImages: [
+      'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1507089947368-19c1da9775ae?auto=format&fit=crop&w=800&q=80'
+    ], 
+    filters: ['Traditional', 'Modern', 'Marble', 'Minimal'] 
+  },
+  { 
+    name: 'Dining Room', 
+    slug: 'dining-room', 
+    description: 'Refined gathering spaces with custom hardwood dining tables, feature pendant lighting, and plaster wall finishes.', 
+    heroImage: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80', 
+    galleryImages: [
+      'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1565183997392-2f6f122e5912?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=800&q=80'
+    ], 
+    filters: ['Formal', 'Casual', 'Luxury', 'Open Plan'] 
+  },
+];
+
+const slides = [
+  {
+    before: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1920&q=90',
+    after: 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1920&q=90',
+    title: 'Living Rooms'
+  },
+  {
+    before: 'https://images.unsplash.com/photo-1556912173-3bb406ef7e77?auto=format&fit=crop&w=1920&q=90',
+    after: 'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=1920&q=90',
+    title: 'Modular Kitchens'
+  },
+  {
+    before: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1920&q=90',
+    after: 'https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1920&q=90',
+    title: 'Master Bedrooms'
+  }
 ];
 
 const WhatWeDo = () => {
@@ -34,6 +180,81 @@ const WhatWeDo = () => {
   const [categories, setCategories] = useState([]);
   const [activeFilter, setActiveFilter] = useState('All');
   const [loading, setLoading] = useState(true);
+  const heroRef = useRef(null);
+  const [sliderPos, setSliderPos] = useState(50);
+  const [containerWidth, setContainerWidth] = useState(0);
+  const isDragging = useRef(false);
+  const [currentSlideIdx, setCurrentSlideIdx] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+
+  useEffect(() => {
+    if (isPaused) return;
+    const timer = setInterval(() => {
+      setCurrentSlideIdx((prev) => (prev + 1) % slides.length);
+    }, 6000);
+    return () => clearInterval(timer);
+  }, [isPaused]);
+
+  // Measure container width for the absolute before image scaling
+  useEffect(() => {
+    if (!heroRef.current) return;
+    setContainerWidth(heroRef.current.clientWidth);
+
+    const handleResize = () => {
+      if (heroRef.current) {
+        setContainerWidth(heroRef.current.clientWidth);
+      }
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [slug]);
+
+  const handleMove = (clientX) => {
+    if (!heroRef.current) return;
+    const rect = heroRef.current.getBoundingClientRect();
+    const x = clientX - rect.left;
+    const pos = Math.max(0, Math.min(100, (x / rect.width) * 100));
+    setSliderPos(pos);
+  };
+
+  const onMouseMove = (e) => {
+    if (!isDragging.current) return;
+    handleMove(e.clientX);
+  };
+
+  const onTouchMove = (e) => {
+    if (!isDragging.current) return;
+    if (e.touches && e.touches[0]) {
+      handleMove(e.touches[0].clientX);
+    }
+  };
+
+  const onStart = () => {
+    isDragging.current = true;
+  };
+
+  const onEnd = () => {
+    isDragging.current = false;
+  };
+
+  useEffect(() => {
+    window.addEventListener('mouseup', onEnd);
+    window.addEventListener('touchend', onEnd);
+    return () => {
+      window.removeEventListener('mouseup', onEnd);
+      window.removeEventListener('touchend', onEnd);
+    };
+  }, []);
+
+  // Scroll-driven parallax — same as Home
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ['start start', 'end end'],
+  });
+  const bgScale = useTransform(scrollYProgress, [0, 1], [1.05, 0.95]);
+  const bgY     = useTransform(scrollYProgress, [0, 1], ['0%', '8%']);
+  const textY   = useTransform(scrollYProgress, [0, 1], ['0px', '-40px']);
+  const textOp  = useTransform(scrollYProgress, [0, 0.6, 1], [1, 0.9, 0]);
 
   useEffect(() => {
     axios.get('/categories')
@@ -133,18 +354,122 @@ const WhatWeDo = () => {
     <div className="bg-bg min-h-screen">
       <SEO title="Space Explorer — ESPACIO Interiors" description="Browse room design categories: kitchens, living rooms, bedrooms, offices, pooja rooms, and wardrobes by ESPACIO." url="/what-we-do" />
 
-      {/* Hero */}
-      <section className="bg-bg-dark relative pt-40 pb-24 px-6 md:px-10 overflow-hidden">
-        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=80"
-          alt="What We Do" className="absolute inset-0 w-full h-full object-cover opacity-25" />
-        <div className="absolute inset-0 bg-gradient-to-b from-bg-dark/60 to-bg-dark/95" />
-        <div className="relative max-w-[1440px] mx-auto">
-          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.1 }}
-            className="font-sans text-[11px] font-semibold uppercase tracking-[0.18em] text-gold mb-6">Space Explorer</motion.p>
-          <motion.h1 initial={{ opacity: 0, y: 32 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="font-display text-[clamp(42px,6vw,80px)] font-bold leading-[1.05] tracking-tight text-bg max-w-[700px]">
-            Every space deserves exceptional design.
-          </motion.h1>
+      {/* ── ROUNDED CARD HERO (Interactive Before/After Slider) ── */}
+      <section
+        ref={heroRef}
+        className="relative h-[80vh] lg:h-[95vh] px-5 pt-5 pb-[10px] lg:px-12 select-none"
+        onMouseDown={onStart}
+        onMouseMove={onMouseMove}
+        onTouchStart={() => { setIsPaused(true); onStart(); }}
+        onTouchMove={onTouchMove}
+        onTouchEnd={() => { setIsPaused(false); onEnd(); }}
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => setIsPaused(false)}
+        onClick={(e) => handleMove(e.clientX)}
+      >
+        {/* The rounded card container */}
+        <div
+          className="relative w-full h-full overflow-hidden rounded-[24px] lg:rounded-[40px] cursor-ew-resize bg-bg-dark"
+        >
+          {/* AFTER Image Layers (Base Layers - Parallax applied) */}
+          {slides.map((slide, idx) => (
+            <motion.div
+              key={`after-${idx}`}
+              style={{ scale: bgScale, y: bgY }}
+              className="absolute inset-0 w-full h-full will-change-transform overflow-hidden pointer-events-none"
+              animate={{ opacity: idx === currentSlideIdx ? 1 : 0 }}
+              transition={{ duration: 0.8, ease: 'easeInOut' }}
+            >
+              <img
+                src={slide.after}
+                alt={`After ${slide.title}`}
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+            </motion.div>
+          ))}
+          
+          {/* AFTER Label */}
+          <div className="absolute right-8 bottom-8 z-20 bg-black/60 backdrop-blur-md px-4 py-2 rounded-full border border-white/10 pointer-events-none">
+            <span className="font-sans text-[11px] font-bold uppercase tracking-wider text-white">AFTER</span>
+          </div>
+
+          {/* BEFORE Image Layers (Overlay Crop Layer) */}
+          <div
+            className="absolute inset-y-0 left-0 overflow-hidden pointer-events-none z-10"
+            style={{ width: `${sliderPos}%` }}
+          >
+            {/* Wrapper forced to full client width to prevent distortion */}
+            <div className="absolute inset-y-0 left-0 h-full" style={{ width: containerWidth || '100vw' }}>
+              {slides.map((slide, idx) => (
+                <motion.div
+                  key={`before-${idx}`}
+                  style={{ scale: bgScale, y: bgY }}
+                  className="absolute inset-0 w-full h-full will-change-transform overflow-hidden pointer-events-none"
+                  animate={{ opacity: idx === currentSlideIdx ? 1 : 0 }}
+                  transition={{ duration: 0.8, ease: 'easeInOut' }}
+                >
+                  <img
+                    src={slide.before}
+                    alt={`Before ${slide.title}`}
+                    className="absolute inset-0 w-full h-full object-cover"
+                  />
+                </motion.div>
+              ))}
+            </div>
+          </div>
+          {/* BEFORE Label */}
+          <div 
+            className="absolute left-8 bottom-8 z-20 bg-black/60 backdrop-blur-md px-4 py-2 rounded-full border border-white/10 pointer-events-none transition-opacity duration-150"
+            style={{ opacity: sliderPos > 12 ? 1 : 0 }}
+          >
+            <span className="font-sans text-[11px] font-bold uppercase tracking-wider text-white">BEFORE</span>
+          </div>
+
+          {/* Slider Line Divider */}
+          <div
+            className="absolute inset-y-0 w-0.5 bg-gold/90 z-25 pointer-events-none shadow-[0_0_15px_rgba(212,175,55,0.6)]"
+            style={{ left: `${sliderPos}%` }}
+          />
+
+          {/* Slider Drag Handle */}
+          <div
+            className="absolute top-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-gold hover:scale-105 active:scale-95 transition-transform flex items-center justify-center cursor-ew-resize shadow-2xl border-2 border-white/10 z-30"
+            style={{ left: `${sliderPos}%` }}
+          >
+            {/* Drag Handle Icon (Left/Right Arrows) */}
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="text-bg-dark">
+              <polyline points="8 18 2 12 8 6" />
+              <polyline points="16 6 22 12 16 18" />
+              <line x1="2" y1="12" x2="22" y2="12" />
+            </svg>
+          </div>
+
+          {/* Text block overlay (Parallax matching main layout) */}
+          <motion.div
+            style={{ y: textY, opacity: textOp }}
+            className="absolute inset-0 z-20 flex flex-col justify-end pointer-events-none"
+          >
+            <div className="w-full px-8 md:px-12 pb-10 md:pb-14">
+              <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                className="flex flex-col items-start gap-4"
+              >
+                {/* Pill label */}
+                <div className="inline-flex items-center gap-2 bg-black/55 backdrop-blur-md border border-white/20 text-white px-4 py-2 rounded-full">
+                  <span className="w-1.5 h-1.5 rounded-full bg-gold animate-pulse" />
+                  <span className="font-sans text-[11px] font-semibold uppercase tracking-[0.2em]">Spaces</span>
+                </div>
+
+                {/* Main heading */}
+                <h1 className="font-display font-bold leading-none tracking-tight text-white transition-all duration-500"
+                  style={{ fontSize: 'clamp(44px, 7vw, 96px)' }}>
+                  {slides[currentSlideIdx].title}
+                </h1>
+              </motion.div>
+            </div>
+          </motion.div>
         </div>
       </section>
 

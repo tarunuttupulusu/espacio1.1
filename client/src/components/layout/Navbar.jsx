@@ -10,7 +10,7 @@ const Navbar = () => {
   const location = useLocation();
 
   // Pages that start with a dark cinematic hero
-  const hasDarkHero = ['/', '/about', '/services', '/what-we-do'].includes(location.pathname);
+  const hasDarkHero = ['/', '/about', '/services', '/projects', '/what-we-do'].includes(location.pathname);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -51,15 +51,16 @@ const Navbar = () => {
     <>
       <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-700 ${
         isNavLight
-          ? 'bg-bg/95 backdrop-blur-md shadow-sm'
-          : 'bg-transparent'
-      }`}>
+          ? 'bg-bg/95 backdrop-blur-md shadow-sm px-0 pt-0'
+          : 'bg-transparent px-5 pt-5 lg:px-12 lg:pt-[10px]'
+      }`}
+      >
         <div className={`max-w-[1440px] mx-auto pl-6 pr-10 flex items-center justify-between transition-all duration-700 ${
-          isNavLight ? 'py-4' : 'pt-[45px] pb-[10px]'
+          isNavLight ? 'py-4' : 'pt-[18px] pb-[10px]'
         }`}>
 
           {/* Logo */}
-          <Link to="/" className="hover:opacity-90 transition-opacity">
+          <Link to="/" className={`hover:opacity-90 transition-opacity ${isNavLight ? '' : 'drop-shadow-[0_1px_3px_rgba(0,0,0,0.55)]'}`}>
             <Logo scrolled={isNavLight} />
           </Link>
 
@@ -71,6 +72,8 @@ const Navbar = () => {
                   key={link.name}
                   to={link.path}
                   className={`relative hover-underline font-sans text-[18px] font-normal tracking-normal transition-colors duration-300 py-1 ${
+                    isNavLight ? '' : 'drop-shadow-[0_1px_2px_rgba(0,0,0,0.65)]'
+                  } ${
                     isActive(link.path) 
                       ? (isNavLight ? 'text-ink font-medium' : 'text-white font-medium')
                       : (isNavLight ? 'text-ink-soft hover:text-ink' : 'text-white/75 hover:text-white')
@@ -88,7 +91,7 @@ const Navbar = () => {
               ))}
             </div>
 
-            {/* CTA Button — matches Resentii: white bg always on transparent, dark bg on scrolled */}
+            {/* CTA Button */}
             <Link 
               to="/contact"
               className={`inline-flex items-center gap-2 font-sans text-[16px] font-medium px-6 py-3 rounded-full transition-all duration-300 ${
@@ -106,6 +109,7 @@ const Navbar = () => {
         </div>
       </nav>
 
+
       {/* Mobile Fullscreen Menu */}
       <AnimatePresence>
         {mobileMenuOpen && (
@@ -114,7 +118,7 @@ const Navbar = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 bg-bg-dark z-50 flex flex-col p-8"
+            className="fixed inset-0 bg-bg-dark z-[100] flex flex-col p-8"
           >
             <div className="flex items-center justify-between mb-16">
               <Link to="/" className="hover:opacity-90">
@@ -122,7 +126,7 @@ const Navbar = () => {
               </Link>
               <button 
                 onClick={() => setMobileMenuOpen(false)} 
-                className="text-bg/60 hover:text-bg transition-colors p-2"
+                className="text-white/60 hover:text-white transition-colors p-2"
               >
                 <X size={22} />
               </button>
@@ -138,7 +142,7 @@ const Navbar = () => {
                 >
                   <Link 
                     to={link.path}
-                    className="block font-display text-3xl font-semibold text-bg/85 hover:text-bg py-3 border-b border-bg/10 transition-colors"
+                    className="block font-display text-3xl font-semibold text-white/85 hover:text-gold py-3 border-b border-white/10 transition-colors"
                   >
                     {link.name}
                   </Link>

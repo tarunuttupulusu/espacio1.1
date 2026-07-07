@@ -22,30 +22,59 @@ const unsplashImages = {
     'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80',
     'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1200&q=80',
     'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1200&q=80',
+    'https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1200&q=80',
+    'https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=1200&q=80',
+    'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80',
+    'https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&w=1200&q=80',
   ],
   apartments: [
     'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=1200&q=80',
     'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=1200&q=80',
     'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=1200&q=80',
     'https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=1200&q=80',
+    'https://images.unsplash.com/photo-1505693395321-883724634266?auto=format&fit=crop&w=1200&q=80',
+    'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=1200&q=80',
+    'https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?auto=format&fit=crop&w=1200&q=80',
+    'https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=1200&q=80',
+    'https://images.unsplash.com/photo-1560185007-cde436f6a4d0?auto=format&fit=crop&w=1200&q=80',
   ],
   commercial: [
     'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80',
     'https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=1200&q=80',
     'https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=1200&q=80',
+    'https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1200&q=80',
+    'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1200&q=80',
+    'https://images.unsplash.com/photo-1531973576160-7125cd663d86?auto=format&fit=crop&w=1200&q=80',
+    'https://images.unsplash.com/photo-1517502884422-41eaaced0168?auto=format&fit=crop&w=1200&q=80',
+    'https://images.unsplash.com/photo-1531538606174-0f90ff5dce83?auto=format&fit=crop&w=1200&q=80',
+    'https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=1200&q=80',
   ],
   kitchens: [
     'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=800&q=80',
     'https://images.unsplash.com/photo-1565183997392-2f6f122e5912?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1507089947368-19c1da9775ae?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1600607687644-c7171b42498f?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1556912173-3bb406ef7e77?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1539924465411-2f99455b87b0?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1520699049698-acd2fccb8cc8?auto=format&fit=crop&w=800&q=80',
   ],
   bedrooms: [
     'https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=800&q=80',
     'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1560185127-6a2806647f81?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1540518614846-7eded433c457?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1507089947368-19c1da9775ae?auto=format&fit=crop&w=800&q=80',
   ],
   materials: [
-    'https://images.unsplash.com/photo-1504198453319-5ce911bafcde?auto=format&fit=crop&w=800&q=80', // Wood panel texture
-    'https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=800&q=80', // Marble surface
-    'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=80', // Minimal concrete/plaster
+    'https://images.unsplash.com/photo-1504198453319-5ce911bafcde?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=80',
   ],
 };
 
@@ -102,7 +131,49 @@ const seedData = async () => {
         slug: spaceObj.slug,
         description: spaceObj.description,
         heroImage: spaceObj.image,
-        galleryImages: [unsplashImages.villas[i % 5], unsplashImages.apartments[i % 4], unsplashImages.kitchens[i % 2]],
+        galleryImages: spaceObj.slug === 'commercial-office' || spaceObj.slug === 'home-office'
+          ? [
+              unsplashImages.commercial[0],
+              unsplashImages.commercial[1],
+              unsplashImages.commercial[2],
+              unsplashImages.commercial[3],
+              unsplashImages.commercial[4],
+              unsplashImages.commercial[5],
+              unsplashImages.commercial[6],
+              unsplashImages.commercial[7],
+            ]
+          : spaceObj.slug === 'modular-kitchen'
+          ? [
+              unsplashImages.kitchens[0],
+              unsplashImages.kitchens[1],
+              unsplashImages.kitchens[2],
+              unsplashImages.kitchens[3],
+              unsplashImages.kitchens[4],
+              unsplashImages.kitchens[5],
+              unsplashImages.kitchens[6],
+              unsplashImages.kitchens[7],
+            ]
+          : spaceObj.slug === 'master-bedroom' || spaceObj.slug === 'wardrobes'
+          ? [
+              unsplashImages.bedrooms[0],
+              unsplashImages.bedrooms[1],
+              unsplashImages.bedrooms[2],
+              unsplashImages.bedrooms[3],
+              unsplashImages.bedrooms[4],
+              unsplashImages.bedrooms[5],
+              unsplashImages.bedrooms[6],
+              unsplashImages.bedrooms[7],
+            ]
+          : [
+              unsplashImages.villas[0],
+              unsplashImages.villas[1],
+              unsplashImages.villas[2],
+              unsplashImages.villas[3],
+              unsplashImages.villas[4],
+              unsplashImages.villas[5],
+              unsplashImages.villas[6],
+              unsplashImages.villas[7],
+            ],
         filters: ['Modern', 'Japandi', 'Minimalist', 'Wood Accent', 'Luxury Plaster'],
         displayOrder: i,
         createdBy: adminUser._id,
@@ -207,13 +278,29 @@ const seedData = async () => {
         heroImage: cat === 'commercial' || cat === 'office' 
           ? unsplashImages.commercial[i % unsplashImages.commercial.length]
           : unsplashImages.villas[i % unsplashImages.villas.length],
-        gallery: [
-          unsplashImages.villas[(i + 1) % 5],
-          unsplashImages.villas[(i + 2) % 5],
-          unsplashImages.apartments[(i + 1) % 4],
-          unsplashImages.kitchens[i % 2],
-          unsplashImages.bedrooms[i % 2],
-        ],
+        gallery: cat === 'commercial' || cat === 'office'
+          ? [
+              unsplashImages.commercial[0],
+              unsplashImages.commercial[1],
+              unsplashImages.commercial[2],
+              unsplashImages.commercial[3],
+              unsplashImages.commercial[4],
+              unsplashImages.commercial[5],
+              unsplashImages.commercial[6],
+              unsplashImages.commercial[7],
+              unsplashImages.commercial[8],
+            ]
+          : [
+              unsplashImages.villas[i % 9],
+              unsplashImages.apartments[(i + 1) % 9],
+              unsplashImages.kitchens[(i + 2) % 9],
+              unsplashImages.bedrooms[(i + 3) % 9],
+              unsplashImages.villas[(i + 4) % 9],
+              unsplashImages.apartments[(i + 5) % 9],
+              unsplashImages.kitchens[(i + 6) % 9],
+              unsplashImages.bedrooms[(i + 7) % 9],
+              unsplashImages.villas[(i + 8) % 9],
+            ],
         beforeImages: [unsplashImages.materials[2]], // renovation comparisons
         afterImages: [unsplashImages.villas[i % 5]],
         testimonial: {
