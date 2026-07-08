@@ -321,17 +321,17 @@ const Home = () => {
                     ].map((s) => (
                       <div 
                         key={s.label} 
-                        className="flex flex-col items-center justify-center w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-[16px] md:rounded-[24px] border border-white/15 shadow-xl text-center"
+                        className="flex flex-col items-center justify-center w-20 h-20 sm:w-24 sm:h-24 md:w-26 md:h-26 rounded-[14px] md:rounded-[20px] border border-white/15 shadow-xl text-center"
                         style={{
                           background: 'rgba(255, 255, 255, 0.08)',
                           backdropFilter: 'blur(16px)',
                           WebkitBackdropFilter: 'blur(16px)',
                         }}
                       >
-                        <p className="font-display text-[26px] sm:text-[30px] md:text-[36px] font-semibold text-white leading-none tracking-tight">
+                        <p className="font-display text-[22px] sm:text-[26px] md:text-[30px] font-semibold text-white leading-none tracking-tight">
                           {s.val}
                         </p>
-                        <p className="font-sans text-[8px] sm:text-[9px] md:text-[10px] text-white/50 uppercase tracking-[0.1em] mt-1.5 px-2 leading-tight">
+                        <p className="font-sans text-[7px] sm:text-[8px] md:text-[9px] text-white/50 uppercase tracking-[0.08em] mt-1 px-1.5 leading-tight">
                           {s.label}
                         </p>
                       </div>
