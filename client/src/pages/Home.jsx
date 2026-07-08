@@ -321,11 +321,11 @@ const Home = () => {
                     ].map((s) => (
                       <div 
                         key={s.label} 
-                        className="flex flex-col items-center justify-center w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-[16px] md:rounded-[24px] border border-white/10 shadow-lg text-center"
+                        className="flex flex-col items-center justify-center w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-[16px] md:rounded-[24px] border border-white/15 shadow-xl text-center"
                         style={{
-                          background: 'rgba(20, 20, 24, 0.55)',
-                          backdropFilter: 'blur(20px)',
-                          WebkitBackdropFilter: 'blur(20px)',
+                          background: 'rgba(255, 255, 255, 0.08)',
+                          backdropFilter: 'blur(16px)',
+                          WebkitBackdropFilter: 'blur(16px)',
                         }}
                       >
                         <p className="font-display text-[26px] sm:text-[30px] md:text-[36px] font-semibold text-white leading-none tracking-tight">
