@@ -63,6 +63,24 @@ const Products = () => {
       )
     : sourceData;
 
+  const fallbacks = [
+    '/images/materials/irish.png',
+    '/images/materials/azzurro.png',
+    '/images/materials/giallo.png',
+    '/images/materials/marbo.png',
+    '/images/materials/florida.png',
+    '/images/materials/menta.png',
+    '/images/materials/giallo_dining.png',
+    '/images/materials/ash.png',
+    '/images/materials/linia.png',
+    '/images/materials/florida_vanity.png',
+    '/images/materials/gracia.png',
+    '/images/materials/irish_gen2.png',
+    '/images/materials/blanco.png',
+    '/images/materials/formic.png',
+    '/images/materials/ash_gen2.png'
+  ];
+
   return (
     <div className="bg-cream min-h-screen pb-24">
       <SEO title="Premium Material Library — WPC, Fluted, Acrylic Panels" description="Explore ESPACIO's curated material library. WPC wall panels, fluted panels, polygranite, acrylic sheets, mosaic tiles and more. Request samples and catalogue." url="/products" />
@@ -72,7 +90,10 @@ const Products = () => {
         {/* Dome Gallery Container */}
         <div className="absolute inset-0 w-full h-full z-0">
           <DomeGallery 
-            images={sourceData.map((p) => ({ src: p.heroImage, alt: p.title }))}
+            images={sourceData.map((p, idx) => ({ 
+              src: p.heroImage || fallbacks[idx % fallbacks.length], 
+              alt: p.title 
+            }))}
             fit={0.45}
             fitBasis="auto"
             overlayBlurColor="#120F17"
@@ -115,7 +136,7 @@ const Products = () => {
               <Link key={idx} to={`/products/${product.slug}`}
                 className="group block rounded-card overflow-hidden bg-offwhite border border-walnut/5 hover:-translate-y-2 transition-all duration-400 shadow-sm">
                 <div className="relative aspect-[4/3] overflow-hidden">
-                  <img src={product.heroImage} alt={product.title}
+                  <img src={product.heroImage || fallbacks[idx % fallbacks.length]} alt={product.title}
                     className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700" />
                   <div className="absolute inset-0 bg-gradient-to-t from-charcoal/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   {/* Feature badges */}
