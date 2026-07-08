@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, ArrowUpRight, Briefcase, FolderKanban, Package } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Logo from '../common/Logo';
+import GooeyNav from '../ui/GooeyNav';
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -44,7 +45,7 @@ const Navbar = () => {
     { name: 'FAQs',      path: '/faq' },
   ];
 
-  const isActive = (path) => path === '/' ? location.pathname === '/' : location.pathname.startsWith(path);
+
 
   // isNavLight = true means white bg + dark text (post-hero or non-hero pages)
   const isNavLight = scrolled || !hasDarkHero;
@@ -68,30 +69,10 @@ const Navbar = () => {
 
           {/* Desktop Nav & CTA Grouped on the right */}
           <div className="hidden lg:flex items-center gap-12 ml-auto">
-            <div className="flex items-center gap-10">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.name}
-                  to={link.path}
-                  className={`relative hover-underline font-sans text-[18px] font-normal tracking-normal transition-colors duration-300 py-1 ${
-                    isNavLight ? '' : 'drop-shadow-[0_1px_2px_rgba(0,0,0,0.65)]'
-                  } ${
-                    isActive(link.path) 
-                      ? (isNavLight ? 'text-ink font-medium' : 'text-white font-medium')
-                      : (isNavLight ? 'text-ink-soft hover:text-ink' : 'text-white/75 hover:text-white')
-                  }`}
-                >
-                  {link.name}
-                  {isActive(link.path) && (
-                    <motion.span
-                      layoutId="activeNav"
-                      className={`absolute bottom-[-3px] left-0 w-full h-[1.5px] ${isNavLight ? 'bg-ink' : 'bg-white'}`}
-                      transition={{ type: 'spring', stiffness: 420, damping: 35 }}
-                    />
-                  )}
-                </Link>
-              ))}
-            </div>
+            <GooeyNav 
+              items={navLinks} 
+              isNavLight={isNavLight}
+            />
 
             {/* CTA Button */}
             <Link 
