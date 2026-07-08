@@ -124,16 +124,14 @@ const Footer = () => {
       </div>
 
       {/* 5. Copyright Strip */}
-      <div className="max-w-[1440px] mx-auto px-6 md:px-12 flex flex-col md:flex-row items-center justify-between gap-4 pt-6 border-t border-white/5">
-        <p className="font-sans text-[12px] text-bg/30">
-          © {year} ESPACIO. All Rights Reserved.
+      <div className="max-w-[1440px] mx-auto px-6 md:px-12 flex flex-col items-center justify-center gap-2 pt-6 pb-4 border-t border-white/5 text-center">
+        <p className="font-sans text-[12px] text-bg/40">
+          © {year} ESPACIO. All rights reserved.
         </p>
-        <div className="flex items-center gap-6 text-[12px] text-bg/30">
-          <Link to="/privacy" className="hover:text-bg/50 transition-colors">Privacy Policy</Link>
-          <span>|</span>
-          <Link to="/terms" className="hover:text-bg/50 transition-colors">Terms of Service</Link>
-          <span>|</span>
-          <Link to="/cookies" className="hover:text-bg/50 transition-colors">Cookie Policy</Link>
+        <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-1 text-[12px] text-bg/40 mt-1">
+          <Link to="/privacy" className="hover:text-bg transition-colors">Privacy Policy</Link>
+          <Link to="/terms" className="hover:text-bg transition-colors">Terms of Service</Link>
+          <Link to="/cookies" className="hover:text-bg transition-colors">Cookie Policy</Link>
         </div>
       </div>
     </footer>
