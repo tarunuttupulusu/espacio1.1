@@ -10,7 +10,9 @@ const Navbar = () => {
   const location = useLocation();
 
   // Pages that start with a dark cinematic hero
-  const hasDarkHero = ['/', '/about', '/services', '/projects', '/what-we-do'].includes(location.pathname);
+  const hasDarkHero = ['/', '/about', '/services', '/projects', '/what-we-do', '/products'].some(path => 
+    path === '/' ? location.pathname === '/' : location.pathname.startsWith(path)
+  );
 
   useEffect(() => {
     const handleScroll = () => {
