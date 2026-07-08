@@ -231,6 +231,91 @@ const ProductDetails = () => {
       colors: [{ name: 'Florida Vanity Marble', hex: '#ECEAE6' }],
       previewPages: ['/images/materials/florida_vanity.png'],
       applications: ['Boutique Powder Room', 'Walk-in Wardrobe Dressing vanity', 'Luxury bathroom partitions']
+    },
+    {
+      title: 'Fluted Acrylic Luxe - Gracia',
+      slug: 'fluted-acrylic-luxe-gracia',
+      category: 'fluted_panels',
+      description: 'Premium NX-GEN 2 Gracia fluted wall panel. Fine off-white marble relief details with standard interlocking installation.',
+      heroImage: '/images/materials/gracia.png',
+      gallery: ['/images/materials/gracia.png'],
+      specifications: [
+        { label: 'Standard Dimensions', value: '2900mm × 122mm × 12mm' },
+        { label: 'Collection Name', value: 'NX-GEN 2 Luxe' },
+        { label: 'Color Shade', value: 'Gracia Marble White' },
+      ],
+      features: ['Luxe Collection', 'NX-GEN 2', 'Gracia Finish', 'Waterproof', 'Easy Install'],
+      colors: [{ name: 'Gracia Marble White', hex: '#EBEAE6' }],
+      previewPages: ['/images/materials/gracia.png'],
+      applications: ['Living room sofa wall backdrop', 'Reception lobbies', 'Executive meeting lounges']
+    },
+    {
+      title: 'Fluted Acrylic Luxe - Irish Gen 2',
+      slug: 'fluted-acrylic-luxe-irish-gen2',
+      category: 'fluted_panels',
+      description: 'NX-GEN 2 Irish fluted panel. Next-generation contemporary off-white finish styling luxury executive workspaces and desks.',
+      heroImage: '/images/materials/irish_gen2.png',
+      gallery: ['/images/materials/irish_gen2.png'],
+      specifications: [
+        { label: 'Standard Dimensions', value: '2900mm × 122mm × 12mm' },
+        { label: 'Collection Name', value: 'NX-GEN 2 Luxe' },
+        { label: 'Color Shade', value: 'Irish Off-White Gen 2' },
+      ],
+      features: ['Luxe Collection', 'NX-GEN 2', 'Irish Finish', 'Anti-Scratch', 'Eco E0 Grade'],
+      colors: [{ name: 'Irish Off-White Gen 2', hex: '#E6E3DB' }],
+      previewPages: ['/images/materials/irish_gen2.png'],
+      applications: ['Executive Workstation desks backdrop', 'Study room accent elevations', 'Luxury library panels']
+    },
+    {
+      title: 'Fluted Acrylic Luxe - Blanco',
+      slug: 'fluted-acrylic-luxe-blanco',
+      category: 'fluted_panels',
+      description: 'NX-GEN 2 Blanco panel. Minimalist crisp-white fluted texture, perfect for styling bunk beds and modern children\'s bedrooms.',
+      heroImage: '/images/materials/blanco.png',
+      gallery: ['/images/materials/blanco.png'],
+      specifications: [
+        { label: 'Standard Dimensions', value: '2900mm × 122mm × 12mm' },
+        { label: 'Collection Name', value: 'NX-GEN 2 Luxe' },
+        { label: 'Color Shade', value: 'Blanco White' },
+      ],
+      features: ['Luxe Collection', 'NX-GEN 2', 'Blanco White', 'Waterproof', 'Termite Proof'],
+      colors: [{ name: 'Blanco White', hex: '#FFFFFF' }],
+      previewPages: ['/images/materials/blanco.png'],
+      applications: ['Kids Bed backdrop wall', 'Bunk bed structural cladding', 'Bright minimalist lounges']
+    },
+    {
+      title: 'Fluted Acrylic Luxe - Formic',
+      slug: 'fluted-acrylic-luxe-formic',
+      category: 'fluted_panels',
+      description: 'Premium NX-GEN 2 Formic panel. Warm vertical oak-grained relief lines detailing high-ceiling staircases and open spaces.',
+      heroImage: '/images/materials/formic.png',
+      gallery: ['/images/materials/formic.png'],
+      specifications: [
+        { label: 'Standard Dimensions', value: '2900mm × 122mm × 12mm' },
+        { label: 'Collection Name', value: 'NX-GEN 2 Luxe' },
+        { label: 'Color Shade', value: 'Formic Oak' },
+      ],
+      features: ['Luxe Collection', 'NX-GEN 2', 'Formic Oak', 'Waterproof', 'Eco E0 Grade'],
+      colors: [{ name: 'Formic Oak', hex: '#E4D6BD' }],
+      previewPages: ['/images/materials/formic.png'],
+      applications: ['Staircase high-ceiling walls', 'Luxury lobby dividers', 'Bespoke divider screens']
+    },
+    {
+      title: 'Fluted Acrylic Luxe - Ash Gen 2',
+      slug: 'fluted-acrylic-luxe-ash-gen2',
+      category: 'fluted_panels',
+      description: 'NX-GEN 2 Ash panel. Light gray contemporary fluted textures, providing a premium backdrop for master suite bed elevations.',
+      heroImage: '/images/materials/ash_gen2.png',
+      gallery: ['/images/materials/ash_gen2.png'],
+      specifications: [
+        { label: 'Standard Dimensions', value: '2900mm × 122mm × 12mm' },
+        { label: 'Collection Name', value: 'NX-GEN 2 Luxe' },
+        { label: 'Color Shade', value: 'Ash Gray Gen 2' },
+      ],
+      features: ['Luxe Collection', 'NX-GEN 2', 'Ash Gray', 'Waterproof', 'Termite Proof'],
+      colors: [{ name: 'Ash Gray Gen 2', hex: '#A8B4BD' }],
+      previewPages: ['/images/materials/ash_gen2.png'],
+      applications: ['Master suite bed headboard wall', 'Luxury TV lounges elevations', 'Hotel rooms key-walls']
     }
   ];
 
