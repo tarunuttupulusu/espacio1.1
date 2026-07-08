@@ -82,11 +82,13 @@ const Products = () => {
   ];
 
   return (
-    <div className="bg-cream min-h-screen pb-24">
+    <div className="bg-bg min-h-screen pb-24">
       <SEO title="Premium Material Library — WPC, Fluted, Acrylic Panels" description="Explore ESPACIO's curated material library. WPC wall panels, fluted panels, polygranite, acrylic sheets, mosaic tiles and more. Request samples and catalogue." url="/products" />
       
-      {/* Hero with Dome Gallery behind */}
-      <section className="relative h-[96vh] min-h-[500px] w-full bg-[#120F17] overflow-hidden">
+      {/* Hero with Dome Gallery — same framed-card pattern as Home & Projects */}
+      <section className="relative h-[80vh] lg:h-[95vh] px-5 pt-5 pb-[10px] lg:px-12">
+        {/* Rounded dark card */}
+        <div className="relative w-full h-full overflow-hidden rounded-[24px] lg:rounded-[40px] bg-[#120F17]">
         {/* Dome Gallery Container */}
         <div className="absolute inset-0 w-full h-full z-0">
           <DomeGallery 
@@ -104,11 +106,11 @@ const Products = () => {
             openedImageBorderRadius="18px"
           />
         </div>
-        
-        {/* Bottom vignette overlay to smoothly blend with search bar */}
+
+        {/* Bottom vignette overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#120F17] via-transparent to-transparent pointer-events-none z-10" />
 
-
+        </div>{/* end rounded card */}
       </section>
 
       {/* Search Bar */}
