@@ -11,4 +11,13 @@ export default defineConfig({
   css: {
     postcss: path.resolve(__dirname, 'postcss.config.js'),
   },
+  resolve: {
+    alias: {
+      react: path.resolve(__dirname, './node_modules/react'),
+      'react-dom': path.resolve(__dirname, './node_modules/react-dom'),
+    },
+  },
+  optimizeDeps: {
+    exclude: ['@use-gesture/react'],
+  },
 })

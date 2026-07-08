@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { Search, ArrowRight, ChevronRight } from 'lucide-react';
 import SEO from '../components/common/SEO';
+import DomeGallery from '../components/ui/DomeGallery';
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -50,18 +51,38 @@ const Products = () => {
   return (
     <div className="bg-cream min-h-screen pb-24">
       <SEO title="Premium Material Library — WPC, Fluted, Acrylic Panels" description="Explore ESPACIO's curated material library. WPC wall panels, fluted panels, polygranite, acrylic sheets, mosaic tiles and more. Request samples and catalogue." url="/products" />
-      {/* Hero */}
-      <section className="relative h-[70vh] bg-black flex items-center">
-        <img src="https://images.unsplash.com/photo-1504198453319-5ce911bafcde?auto=format&fit=crop&w=1920&q=80" alt="Premium Material Library" className="absolute inset-0 w-full h-full object-cover opacity-55" />
-        <div className="absolute inset-0 bg-gradient-to-t from-charcoal/90 to-charcoal/20" />
-        <div className="relative max-w-[1440px] w-full mx-auto px-6 md:px-12 z-10 pt-20 space-y-5">
-          <span className="font-sans text-xs uppercase tracking-widest text-gold font-bold">Material Library</span>
-          <h1 className="text-white text-5xl md:text-6xl font-editorial font-bold leading-tight max-w-[750px]">
-            Materials <br />Chosen <br />With Intention.
-          </h1>
-          <p className="font-sans text-cream/85 text-sm max-w-[500px] leading-relaxed">
-            Every finish is selected for durability, beauty, and timeless performance. Sourced globally, warehoused locally.
-          </p>
+      
+      {/* Hero with Dome Gallery behind */}
+      <section className="relative h-[80vh] min-h-[500px] w-full bg-[#120F17] overflow-hidden">
+        {/* Dome Gallery Container */}
+        <div className="absolute inset-0 w-full h-full z-0">
+          <DomeGallery 
+            images={sourceData.map((p) => ({ src: p.heroImage, alt: p.title }))}
+            fit={0.65}
+            fitBasis="auto"
+            overlayBlurColor="#120F17"
+            grayscale={false}
+            openedImageWidth="280px"
+            openedImageHeight="380px"
+            imageBorderRadius="16px"
+            openedImageBorderRadius="24px"
+          />
+        </div>
+        
+        {/* Bottom vignette overlay to smoothly blend with search bar */}
+        <div className="absolute inset-0 bg-gradient-to-t from-[#120F17] via-transparent to-transparent pointer-events-none z-10" />
+
+        {/* Foreground Content */}
+        <div className="absolute inset-0 flex items-center pointer-events-none z-20">
+          <div className="max-w-[1440px] w-full mx-auto px-6 md:px-12 pt-20 space-y-5 pointer-events-auto">
+            <span className="font-sans text-xs uppercase tracking-widest text-gold font-bold">Material Library</span>
+            <h1 className="text-white text-5xl md:text-6xl font-editorial font-bold leading-tight max-w-[750px]">
+              Materials <br />Chosen <br />With Intention.
+            </h1>
+            <p className="font-sans text-cream/85 text-sm max-w-[500px] leading-relaxed">
+              Every finish is selected for durability, beauty, and timeless performance. Drag the gallery to explore.
+            </p>
+          </div>
         </div>
       </section>
 

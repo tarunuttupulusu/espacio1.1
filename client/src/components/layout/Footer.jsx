@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
 import { motion, useInView } from 'framer-motion';
+import { SocialLightButton } from '../ui/SocialLightButton';
 
 const Footer = () => {
   const year = new Date().getFullYear();
@@ -57,47 +58,129 @@ const Footer = () => {
       {/* Thin Divider line */}
       <div className="max-w-[1440px] mx-auto px-6 md:px-12 border-t border-white/10 mb-12" />
 
-      {/* 2. Contact Block: Address + Get in Touch side by side */}
-      <div className="max-w-[1440px] mx-auto px-6 md:px-12 flex flex-col md:flex-row md:justify-between items-start gap-8 mb-14">
-        {/* Address + Phone */}
-        <div>
-          <p className="font-sans text-[15px] text-bg/60 leading-relaxed">
-            Aziznagar, Moinabad Road, Hyderabad, Telangana 500075
-          </p>
-          <a href="tel:+919000000000" className="font-sans text-[15px] text-bg/60 hover:text-bg transition-colors block mt-1">
-            +91 90000 00000
-          </a>
-        </div>
-
-        {/* Get in Touch + Email */}
-        <div className="md:text-right">
-          <p className="font-sans text-[13px] text-white/40 mb-1">
-            Get in Touch
-          </p>
-          <a href="mailto:espacio.hyd@gmail.com" className="font-sans text-[17px] md:text-[20px] font-medium text-bg hover:text-gold transition-colors">
-            espacio.hyd@gmail.com
-          </a>
-        </div>
-      </div>
-
-      {/* 3. Nav + Social Responsive Row */}
-      <div className="max-w-[1440px] mx-auto px-6 md:px-12 grid grid-cols-2 md:flex md:flex-row md:justify-between gap-x-6 gap-y-8 pb-12 mb-4">
-        {/* Left: Nav Links — vertical on mobile, horizontal on desktop */}
-        <div className="flex flex-col md:flex-row md:flex-wrap gap-4 md:gap-x-6 md:gap-y-2">
-          {navLinks.map((link) => (
-            <Link key={link.name} to={link.href} className="font-sans text-[14px] font-medium text-bg/60 hover:text-bg transition-colors">
-              {link.name}
-            </Link>
-          ))}
-        </div>
-
-        {/* Right: Social Links — vertical/aligned right on mobile, horizontal on desktop */}
-        <div className="flex flex-col items-end md:flex-row gap-4 md:gap-6 md:items-center">
-          {socialLinks.map((link) => (
-            <a key={link.name} href={link.href} target="_blank" rel="noopener noreferrer" className="font-sans text-[14px] font-medium text-bg/60 hover:text-bg transition-colors">
-              {link.name}
+      {/* 2. Combined Footer Info Row */}
+      <div className="max-w-[1440px] mx-auto px-6 md:px-12 flex flex-col lg:flex-row lg:justify-between items-start gap-12 pb-16 mb-4">
+        
+        {/* Left Side Group (Location, Gmail, and Explore on desktop) */}
+        <div className="flex flex-col items-start gap-8 w-full lg:max-w-[480px]">
+          
+          {/* A. Location + Phone */}
+          <div>
+            <p className="font-sans text-[13px] text-white/40 mb-1 select-none uppercase tracking-wider">
+              Location
+            </p>
+            <a 
+              href="https://maps.google.com/?q=Aziznagar,+Moinabad+Road,+Hyderabad,+Telangana+500075"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-sans text-[15px] text-bg/60 hover:text-bg transition-colors block leading-relaxed hover:underline decoration-white/20 underline-offset-4"
+            >
+              Aziznagar, Moinabad Road, Hyderabad, Telangana 500075
             </a>
-          ))}
+            <a href="tel:+919000000000" className="font-sans text-[15px] text-bg/60 hover:text-bg transition-colors block mt-1">
+              +91 90000 00000
+            </a>
+          </div>
+
+
+
+          {/* C. Explore Links (Desktop-only inside this column) */}
+          <div className="hidden lg:block w-full">
+            <p className="font-sans text-[13px] text-white/40 mb-3 select-none uppercase tracking-wider">
+              Explore
+            </p>
+            <div className="flex flex-row flex-wrap gap-x-5 gap-y-2">
+              {navLinks.map((link) => (
+                <Link key={link.name} to={link.href} className="font-sans text-[14px] font-medium text-bg/60 hover:text-bg transition-colors">
+                  {link.name}
+                </Link>
+              ))}
+            </div>
+          </div>
+
+        </div>
+
+        {/* Mobile-only Link Section: 2 columns (Explore on left, Social text links on right) */}
+        <div className="grid grid-cols-2 w-full gap-8 lg:hidden pb-4">
+          {/* Left Column: Nav links */}
+          <div>
+            <div className="flex flex-col gap-3">
+              {navLinks.map((link) => (
+                <Link key={link.name} to={link.href} className="font-sans text-[14px] font-medium text-bg/60 hover:text-bg transition-colors">
+                  {link.name}
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          {/* Right Column: Social text links (right-aligned) */}
+          <div className="flex flex-col items-end gap-3 text-right">
+            <a href="https://www.instagram.com/theespacio.in" target="_blank" rel="noopener noreferrer" className="font-sans text-[14px] font-medium text-bg/60 hover:text-bg transition-colors">
+              Instagram
+            </a>
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="font-sans text-[14px] font-medium text-bg/60 hover:text-bg transition-colors">
+              Facebook
+            </a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="font-sans text-[14px] font-medium text-bg/60 hover:text-bg transition-colors">
+              Linkedin
+            </a>
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="font-sans text-[14px] font-medium text-bg/60 hover:text-bg transition-colors">
+              Twitter
+            </a>
+          </div>
+        </div>
+
+        {/* Desktop-only: Social Logos (hidden on mobile) */}
+        <div className="hidden lg:flex flex-row flex-wrap gap-4 items-center justify-end lg:mt-4">
+          <SocialLightButton 
+            label="Instagram"
+            href="https://www.instagram.com/theespacio.in"
+            color="#E4405F"
+            beamColor="rgba(228, 64, 95, 0.4)"
+            icon={
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+              </svg>
+            }
+          />
+          <SocialLightButton 
+            label="Facebook"
+            href="https://facebook.com"
+            color="#1877F2"
+            beamColor="rgba(24, 119, 242, 0.4)"
+            icon={
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+              </svg>
+            }
+          />
+          <SocialLightButton 
+            label="LinkedIn"
+            href="https://linkedin.com"
+            color="#0A66C2"
+            beamColor="rgba(10, 102, 194, 0.4)"
+            icon={
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                <rect x="2" y="9" width="4" height="12"></rect>
+                <circle cx="4" cy="4" r="2"></circle>
+              </svg>
+            }
+          />
+          <SocialLightButton 
+            label="X"
+            href="https://twitter.com"
+            color="#ffffff"
+            beamColor="rgba(255, 255, 255, 0.4)"
+            icon={
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M4 4l11.733 16h4.267l-11.733 -16z" />
+                <path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772" />
+              </svg>
+            }
+          />
         </div>
       </div>
 
