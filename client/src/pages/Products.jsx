@@ -72,18 +72,7 @@ const Products = () => {
         {/* Bottom vignette overlay to smoothly blend with search bar */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#120F17] via-transparent to-transparent pointer-events-none z-10" />
 
-        {/* Foreground Content */}
-        <div className="absolute inset-0 flex items-center pointer-events-none z-20">
-          <div className="max-w-[1440px] w-full mx-auto px-6 md:px-12 pt-20 space-y-5 pointer-events-auto">
-            <span className="font-sans text-xs uppercase tracking-widest text-gold font-bold">Material Library</span>
-            <h1 className="text-white text-5xl md:text-6xl font-editorial font-bold leading-tight max-w-[750px]">
-              Materials <br />Chosen <br />With Intention.
-            </h1>
-            <p className="font-sans text-cream/85 text-sm max-w-[500px] leading-relaxed">
-              Every finish is selected for durability, beauty, and timeless performance. Drag the gallery to explore.
-            </p>
-          </div>
-        </div>
+
       </section>
 
       {/* Search Bar */}
