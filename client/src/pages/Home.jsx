@@ -217,7 +217,7 @@ const Home = () => {
 
           {/* ─── Foreground Glass Cards (pinned to bottom) ─── */}
           <div className="absolute inset-0 z-10 flex flex-col justify-end pointer-events-none">
-              <div className="w-full max-w-[1440px] mx-auto px-6 md:px-12 pb-8 md:pb-14 pointer-events-auto">
+              <div className="w-full max-w-[1440px] mx-auto px-6 md:px-12 pb-8 md:pb-14 lg:pb-0 pointer-events-auto">
               
               <motion.div 
                 className="flex flex-col lg:flex-row items-end gap-4 lg:gap-6"
