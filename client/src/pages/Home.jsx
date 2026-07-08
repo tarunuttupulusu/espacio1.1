@@ -313,15 +313,27 @@ const Home = () => {
                   >
                   
                   {/* Stats Row */}
-                  <div className="flex gap-6 md:gap-10 lg:justify-end">
+                  <div className="flex flex-row gap-4 md:gap-5 lg:justify-end">
                     {[
                       { val: '15+', label: 'Years Legacy' },
                       { val: '25+', label: 'Projects' },
                       { val: '98%', label: 'Satisfaction' },
                     ].map((s) => (
-                      <div key={s.label} className="text-center lg:text-right">
-                        <p className="font-display text-[52px] md:text-[64px] font-semibold text-white leading-none tracking-tight">{s.val}</p>
-                        <p className="font-sans text-[11px] text-white/55 uppercase tracking-[0.15em] mt-1">{s.label}</p>
+                      <div 
+                        key={s.label} 
+                        className="flex flex-col items-center justify-center w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-[16px] md:rounded-[24px] border border-white/10 shadow-lg text-center"
+                        style={{
+                          background: 'rgba(20, 20, 24, 0.55)',
+                          backdropFilter: 'blur(20px)',
+                          WebkitBackdropFilter: 'blur(20px)',
+                        }}
+                      >
+                        <p className="font-display text-[26px] sm:text-[30px] md:text-[36px] font-semibold text-white leading-none tracking-tight">
+                          {s.val}
+                        </p>
+                        <p className="font-sans text-[8px] sm:text-[9px] md:text-[10px] text-white/50 uppercase tracking-[0.1em] mt-1.5 px-2 leading-tight">
+                          {s.label}
+                        </p>
                       </div>
                     ))}
                   </div>
