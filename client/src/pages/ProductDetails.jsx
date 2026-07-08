@@ -146,6 +146,91 @@ const ProductDetails = () => {
       colors: [{ name: 'Florida Marble', hex: '#ECEAE6' }],
       previewPages: ['/images/materials/florida.png'],
       applications: ['Luxury Living TV panels', 'Master Suite backdrop elevation', 'Retail luxury boutique backdrop']
+    },
+    {
+      title: 'Fluted Acrylic Luxe - Menta',
+      slug: 'fluted-acrylic-luxe-menta',
+      category: 'fluted_panels',
+      description: 'NX-GEN 1 Menta fluted wall panel. Restful and organic mint green vertical textures, perfect for calming bedroom designs.',
+      heroImage: '/images/materials/menta.png',
+      gallery: ['/images/materials/menta.png'],
+      specifications: [
+        { label: 'Standard Dimensions', value: '2900mm × 122mm × 12mm' },
+        { label: 'Collection Name', value: 'NX-GEN 1 Luxe' },
+        { label: 'Color Shade', value: 'Menta Mint Green' },
+      ],
+      features: ['Luxe Collection', 'NX-GEN 1', 'Menta Green', 'Waterproof', 'Eco E0 Grade'],
+      colors: [{ name: 'Menta Green', hex: '#A2C2B3' }],
+      previewPages: ['/images/materials/menta.png'],
+      applications: ['Bed Headboards backdrop', 'Spas & Wellness centers', 'Living room calming walls']
+    },
+    {
+      title: 'Fluted Acrylic Luxe - Giallo Dining',
+      slug: 'fluted-acrylic-luxe-giallo-dining',
+      category: 'fluted_panels',
+      description: 'NX-GEN 1 Giallo Dining panel. Modern sand-tinted vertical lines styling luxury family dining partitions and ambient layouts.',
+      heroImage: '/images/materials/giallo_dining.png',
+      gallery: ['/images/materials/giallo_dining.png'],
+      specifications: [
+        { label: 'Standard Dimensions', value: '2900mm × 122mm × 12mm' },
+        { label: 'Collection Name', value: 'NX-GEN 1 Luxe' },
+        { label: 'Color Shade', value: 'Giallo Sand' },
+      ],
+      features: ['Luxe Collection', 'NX-GEN 1', 'Giallo Sand', 'Heat Resistant', 'Termite Proof'],
+      colors: [{ name: 'Giallo Sand', hex: '#D7CBBD' }],
+      previewPages: ['/images/materials/giallo_dining.png'],
+      applications: ['Dining Space feature panels', 'Restaurant ambient divisions', 'Luxury kitchen partitions']
+    },
+    {
+      title: 'Fluted Acrylic Luxe - Ash',
+      slug: 'fluted-acrylic-luxe-ash',
+      category: 'fluted_panels',
+      description: 'NX-GEN 1 Ash fluted element. Clean industrial slate ash tones, offering a sophisticated background for media consoles and screens.',
+      heroImage: '/images/materials/ash.png',
+      gallery: ['/images/materials/ash.png'],
+      specifications: [
+        { label: 'Standard Dimensions', value: '2900mm × 122mm × 12mm' },
+        { label: 'Collection Name', value: 'NX-GEN 1 Luxe' },
+        { label: 'Color Shade', value: 'Ash Gray-Blue' },
+      ],
+      features: ['Luxe Collection', 'NX-GEN 1', 'Ash Gray', 'Waterproof', 'Termite Proof'],
+      colors: [{ name: 'Ash Gray-Blue', hex: '#9CAAB6' }],
+      previewPages: ['/images/materials/ash.png'],
+      applications: ['Living room TV Backdrop', 'Smart Entertainment Units', 'Office lounge focus wall']
+    },
+    {
+      title: 'Fluted Acrylic Luxe - Linia',
+      slug: 'fluted-acrylic-luxe-linia',
+      category: 'fluted_panels',
+      description: 'Luxury NX-GEN 2 Linia panel. Delicate warm marble surface patterns detailed with rich gold veins for premium bathroom vanity accenting.',
+      heroImage: '/images/materials/linia.png',
+      gallery: ['/images/materials/linia.png'],
+      specifications: [
+        { label: 'Standard Dimensions', value: '2900mm × 122mm × 12mm' },
+        { label: 'Collection Name', value: 'NX-GEN 2 Luxe' },
+        { label: 'Color Shade', value: 'Linia Gold Marble' },
+      ],
+      features: ['Luxe Collection', 'NX-GEN 2', 'Linia Gold', 'Waterproof', 'Anti-Scratch'],
+      colors: [{ name: 'Linia Gold Marble', hex: '#F0ECE1' }],
+      previewPages: ['/images/materials/linia.png'],
+      applications: ['Luxury Bathroom basins wall', 'Premium vanity units elevation', 'Spa backdrop dividers']
+    },
+    {
+      title: 'Fluted Acrylic Luxe - Florida Vanity',
+      slug: 'fluted-acrylic-luxe-florida-vanity',
+      category: 'fluted_panels',
+      description: 'NX-GEN 2 Florida Vanity layout. Elegant vertical marble and gold trim detailing designed for high-end boutique powder rooms and dressing spaces.',
+      heroImage: '/images/materials/florida_vanity.png',
+      gallery: ['/images/materials/florida_vanity.png'],
+      specifications: [
+        { label: 'Standard Dimensions', value: '2900mm × 122mm × 12mm' },
+        { label: 'Collection Name', value: 'NX-GEN 2 Luxe' },
+        { label: 'Color Shade', value: 'Florida Vanity Marble' },
+      ],
+      features: ['Luxe Collection', 'NX-GEN 2', 'Florida Gold Marble', 'Anti-Scratch', 'Waterproof'],
+      colors: [{ name: 'Florida Vanity Marble', hex: '#ECEAE6' }],
+      previewPages: ['/images/materials/florida_vanity.png'],
+      applications: ['Boutique Powder Room', 'Walk-in Wardrobe Dressing vanity', 'Luxury bathroom partitions']
     }
   ];
 
