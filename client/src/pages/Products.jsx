@@ -73,14 +73,14 @@ const Products = () => {
         <div className="absolute inset-0 w-full h-full z-0">
           <DomeGallery 
             images={sourceData.map((p) => ({ src: p.heroImage, alt: p.title }))}
-            fit={0.65}
+            fit={0.45}
             fitBasis="auto"
             overlayBlurColor="#120F17"
             grayscale={false}
-            openedImageWidth="280px"
-            openedImageHeight="380px"
-            imageBorderRadius="16px"
-            openedImageBorderRadius="24px"
+            openedImageWidth="220px"
+            openedImageHeight="300px"
+            imageBorderRadius="12px"
+            openedImageBorderRadius="18px"
           />
         </div>
         
