@@ -237,7 +237,7 @@ const Home = () => {
 
                 {/* ─── LEFT: Craft Card ─── */}
                 <motion.div
-                  className="w-full lg:max-w-[480px]"
+                  className="w-full lg:max-w-[380px]"
                 >
                   <motion.div 
                     className="relative rounded-[20px] md:rounded-[28px] overflow-hidden border border-white/[0.15] shadow-2xl"
@@ -269,7 +269,7 @@ const Home = () => {
                       </div>
 
                       {/* Headline */}
-                      <h1 className="font-display text-[32px] sm:text-[44px] md:text-[52px] font-bold leading-[1.05] tracking-tight text-white mb-5">
+                      <h1 className="font-display text-[32px] sm:text-[44px] lg:text-[36px] font-bold leading-[1.05] tracking-tight text-white mb-5">
                         We Craft the<br />Future Dwelling
                       </h1>
 
@@ -326,9 +326,9 @@ const Home = () => {
                     ))}
                   </div>
 
-                  {/* Description (hidden on mobile to prevent overflow) */}
+                  {/* Description (hidden on mobile and laptop to prevent overflow) */}
                   <div 
-                    className="hidden sm:block lg:max-w-[400px] lg:ml-auto rounded-[20px] md:rounded-[24px] p-5 md:p-6 border border-white/[0.12]"
+                    className="hidden sm:block lg:hidden lg:max-w-[400px] lg:ml-auto rounded-[20px] md:rounded-[24px] p-5 md:p-6 border border-white/[0.12]"
                     style={{ 
                       background: 'rgba(20, 20, 24, 0.55)',
                       backdropFilter: 'blur(28px)',
