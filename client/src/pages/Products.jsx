@@ -53,7 +53,7 @@ const Products = () => {
       <SEO title="Premium Material Library — WPC, Fluted, Acrylic Panels" description="Explore ESPACIO's curated material library. WPC wall panels, fluted panels, polygranite, acrylic sheets, mosaic tiles and more. Request samples and catalogue." url="/products" />
       
       {/* Hero with Dome Gallery behind */}
-      <section className="relative h-[80vh] min-h-[500px] w-full bg-[#120F17] overflow-hidden">
+      <section className="relative h-[96vh] min-h-[500px] w-full bg-[#120F17] overflow-hidden">
         {/* Dome Gallery Container */}
         <div className="absolute inset-0 w-full h-full z-0">
           <DomeGallery 
