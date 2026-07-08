@@ -55,6 +55,100 @@ const ProductDetails = () => {
     applications: ['Modular Kitchen Cabinets', 'Living Room Feature Walls', 'Bedroom Headboards', 'Office Ceilings', 'Bathroom Panels', 'Commercial Reception'],
   };
 
+  const mockProductsList = [
+    {
+      title: 'Fluted Acrylic Luxe - Irish',
+      slug: 'fluted-acrylic-luxe-irish',
+      category: 'fluted_panels',
+      description: 'Premium NX-GEN 1 Irish fluted acrylic wall panel with rich relief lines and a contemporary matte off-white finish.',
+      heroImage: '/images/materials/irish.png',
+      gallery: ['/images/materials/irish.png'],
+      specifications: [
+        { label: 'Standard Dimensions', value: '2900mm × 122mm × 12mm' },
+        { label: 'Core Weight', value: '1.8 kg/m' },
+        { label: 'Collection Name', value: 'NX-GEN 1 Luxe' },
+        { label: 'Color Shade', value: 'Irish Off-White' },
+        { label: 'Installation Type', value: 'Interlocking Tongue & Groove' },
+        { label: 'Surface Finish', value: 'Matte Acrylic fluted relief' },
+      ],
+      features: ['Luxe Collection', 'NX-GEN 1', 'Irish Finish', '100% Waterproof', 'Termite Proof', 'Flame Retardant'],
+      colors: [{ name: 'Irish Off-White', hex: '#EAE6DF' }],
+      previewPages: ['/images/materials/irish.png'],
+      applications: ['Modular Wardrobes', 'Living Room Accent Panels', 'Bedroom Headboards']
+    },
+    {
+      title: 'Fluted Acrylic Luxe - Azzurro',
+      slug: 'fluted-acrylic-luxe-azzurro',
+      category: 'fluted_panels',
+      description: 'Elegant NX-GEN 1 Azzurro fluted accent panel in a beautiful sky-blue finish, perfect for premium master bedrooms and lounges.',
+      heroImage: '/images/materials/azzurro.png',
+      gallery: ['/images/materials/azzurro.png'],
+      specifications: [
+        { label: 'Standard Dimensions', value: '2900mm × 122mm × 12mm' },
+        { label: 'Core Weight', value: '1.8 kg/m' },
+        { label: 'Collection Name', value: 'NX-GEN 1 Luxe' },
+        { label: 'Color Shade', value: 'Azzurro Sky Blue' },
+        { label: 'Installation Type', value: 'Interlocking Tongue & Groove' },
+      ],
+      features: ['Luxe Collection', 'NX-GEN 1', 'Azzurro Blue', '100% Waterproof', 'Termite Proof', 'Flame Retardant'],
+      colors: [{ name: 'Azzurro Blue', hex: '#87B5C8' }],
+      previewPages: ['/images/materials/azzurro.png'],
+      applications: ['Master Bedroom Headboard', 'Living Room Feature Wall', 'Creative Studio Lounge']
+    },
+    {
+      title: 'Fluted Acrylic Luxe - Giallo',
+      slug: 'fluted-acrylic-luxe-giallo',
+      category: 'fluted_panels',
+      description: 'NX-GEN 1 Giallo fluted panel. Professional workspace accent element with clean textured lines in a medium-gray tone.',
+      heroImage: '/images/materials/giallo.png',
+      gallery: ['/images/materials/giallo.png'],
+      specifications: [
+        { label: 'Standard Dimensions', value: '2900mm × 122mm × 12mm' },
+        { label: 'Core Weight', value: '1.8 kg/m' },
+        { label: 'Collection Name', value: 'NX-GEN 1 Luxe' },
+        { label: 'Color Shade', value: 'Giallo Slate Gray' },
+      ],
+      features: ['Luxe Collection', 'NX-GEN 1', 'Giallo Gray', '100% Waterproof', 'Flame Retardant'],
+      colors: [{ name: 'Giallo Slate Gray', hex: '#8E8D8A' }],
+      previewPages: ['/images/materials/giallo.png'],
+      applications: ['Home Office Desks Backdrop', 'Executive Meeting Rooms', 'Reception counters']
+    },
+    {
+      title: 'Fluted Acrylic Luxe - Marbo',
+      slug: 'fluted-acrylic-luxe-marbo',
+      category: 'fluted_panels',
+      description: 'NX-GEN 1 Marbo panel. Curator-selected sandy-beige fluted cladding for warm light-diffused luxury dining environments.',
+      heroImage: '/images/materials/marbo.png',
+      gallery: ['/images/materials/marbo.png'],
+      specifications: [
+        { label: 'Standard Dimensions', value: '2900mm × 122mm × 12mm' },
+        { label: 'Collection Name', value: 'NX-GEN 1 Luxe' },
+        { label: 'Color Shade', value: 'Marbo Sandy Beige' },
+      ],
+      features: ['Luxe Collection', 'NX-GEN 1', 'Marbo Sand', '100% Waterproof', 'Eco E0 Grade'],
+      colors: [{ name: 'Marbo Sand', hex: '#D2C1AE' }],
+      previewPages: ['/images/materials/marbo.png'],
+      applications: ['Dining Room Feature Wall', 'Kitchen backsplash partitions', 'Hotel lobby lounges']
+    },
+    {
+      title: 'Fluted Acrylic Luxe - Florida',
+      slug: 'fluted-acrylic-luxe-florida',
+      category: 'fluted_panels',
+      description: 'Premium NX-GEN 1 Florida fluted surface displaying high-fidelity white marble texture running with golden veins.',
+      heroImage: '/images/materials/florida.png',
+      gallery: ['/images/materials/florida.png'],
+      specifications: [
+        { label: 'Standard Dimensions', value: '2900mm × 122mm × 12mm' },
+        { label: 'Collection Name', value: 'NX-GEN 1 Luxe' },
+        { label: 'Color Shade', value: 'Florida Golden Marble' },
+      ],
+      features: ['Luxe Collection', 'NX-GEN 1', 'Florida Marble', 'Anti-Scratch', 'Waterproof'],
+      colors: [{ name: 'Florida Marble', hex: '#ECEAE6' }],
+      previewPages: ['/images/materials/florida.png'],
+      applications: ['Luxury Living TV panels', 'Master Suite backdrop elevation', 'Retail luxury boutique backdrop']
+    }
+  ];
+
   useEffect(() => {
     const fetchProduct = async () => {
       try {
@@ -62,10 +156,12 @@ const ProductDetails = () => {
         if (response.data.success && response.data.data) {
           setProduct(response.data.data);
         } else {
-          setProduct(mockProduct);
+          const found = mockProductsList.find(m => m.slug === slug);
+          setProduct(found || mockProduct);
         }
       } catch {
-        setProduct(mockProduct);
+        const found = mockProductsList.find(m => m.slug === slug);
+        setProduct(found || mockProduct);
       } finally {
         setLoading(false);
       }
